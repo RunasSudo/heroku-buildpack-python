@@ -19,6 +19,13 @@ BUILD_DIR=$1
 CACHE_DIR=$2
 ENV_DIR=$3
 
+if [ -d "$ENV_DIR" ]; then
+  for e in $(ls $ENV_DIR); do
+    echo "Exporting $e=$(cat $ENV_DIR/$e)"
+    export "$e=$(cat $ENV_DIR/$e)"
+  done
+fi
+
 # Static configurations for virtualenv caches.
 VIRTUALENV_LOC=".heroku/venv"
 LEGACY_TRIGGER="lib/python2.7"
